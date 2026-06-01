@@ -1,0 +1,16 @@
+{
+  "name": "internshield-backend",
+  "version": "1.0.0",
+  "description": "Express API that analyzes internship URLs for trust signals",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "cheerio": "^1.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.4.2",
+    "express": "^4.21.2"
+  }
+}
