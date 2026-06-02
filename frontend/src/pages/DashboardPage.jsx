@@ -26,11 +26,14 @@ export default function DashboardPage() {
     setLoading(true);
 
     try {
-      const response = await fetch("/api/analyze", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ url }),
-      });
+      const response = await fetch(
+        "https://internshield-hmt2.onrender.com/api/analyze",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ url }),
+        }
+      );
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || "Analysis failed");
       setResult(data);
