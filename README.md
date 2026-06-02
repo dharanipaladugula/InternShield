@@ -114,7 +114,7 @@ Trust Score + Risk Assessment Report
 
 ![Google Analysis Security](screenshots/google-analysis-security.png)
 
-![Google Analysis Risks](screenshots/google-analysis-risks.png)
+![Google Analysis Risks](screenshots/google-analysis-risk&brief.png)
 
 ### Suspicious Internship Domain Analysis
 
