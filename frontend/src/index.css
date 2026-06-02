@@ -1864,7 +1864,33 @@ box-shadow:
 
   margin-top: 22px;
 }
+.trust-meter-card__signals {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
 
+.trust-meter-card__signals h4 {
+  margin: 0 0 0.75rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text-primary);
+}
+
+.trust-meter-card__signals ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.trust-meter-card__signals li {
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  line-height: 1.4;
+}
 .trust-meter-card__label {
   display: block;
 
@@ -1873,6 +1899,46 @@ box-shadow:
   margin-bottom: 6px;
 
   font-size: 0.85rem;
+}
+.trust-meter-card__signals {
+  margin-top: 24px;
+
+  padding-top: 18px;
+
+  border-top:
+    1px solid rgba(255,255,255,0.08);
+}
+
+.trust-meter-card__signals h4 {
+  margin-bottom: 12px;
+
+  font-size: 0.95rem;
+
+  color: rgba(255,255,255,0.8);
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.08em;
+}
+
+.trust-meter-card__signals ul {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+
+  list-style: none;
+
+  padding: 0;
+
+  margin: 0;
+}
+
+.trust-meter-card__signals li {
+  color: rgba(255,255,255,0.88);
+
+  font-size: 0.95rem;
 }
 /* =========================================
    SIGNAL GRID
@@ -2171,9 +2237,12 @@ box-shadow:
   min-height: 220px;
 }
 .detection-summary__list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+  display:grid;
+
+  grid-template-columns:
+    repeat(2, 1fr);
+
+  gap:16px;
 }
 
 .detection-summary__item {

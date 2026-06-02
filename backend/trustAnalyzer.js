@@ -815,27 +815,31 @@ function applyShortenerScoring(trustScore, riskIndicators, isShortener) {
 function applyRedirectScoring(trustScore, riskIndicators, redirectCount) {
   if (redirectCount >= REDIRECT_EXCESSIVE_MIN) {
     riskIndicators.push(
-      `Excessive redirects: ${redirectCount} hops (−${REDIRECT_EXCESSIVE_PENALTY} points — may hide the real destination)`
+      `✕ Excessive redirects detected (${redirectCount} hops)`
     );
+
     return trustScore - REDIRECT_EXCESSIVE_PENALTY;
   }
 
-  if (redirectCount >= 1 && redirectCount <= REDIRECT_MODERATE_MAX) {
+  if (
+    redirectCount >= 1 &&
+    redirectCount <= REDIRECT_MODERATE_MAX
+  ) {
     riskIndicators.push(
-      `${redirectCount} redirect(s) before final page (−${REDIRECT_MODERATE_PENALTY} points)`
+      "⚠ Redirected before reaching final destination"
     );
+
     return trustScore - REDIRECT_MODERATE_PENALTY;
   }
 
   if (redirectCount === 3) {
     riskIndicators.push(
-      "3 redirects before final page (no extra penalty, but worth reviewing the final URL)"
+      "⚠ Multiple redirects detected"
     );
   }
 
   return trustScore;
 }
-
 /**
  * True if hostname is the official domain or a subdomain (e.g. careers.google.com).
  */
@@ -1162,21 +1166,25 @@ function applyDomainAgeScoring(trustScore, riskIndicators, domainAgeDays) {
 
   if (domainAgeDays < 30) {
     riskIndicators.push(
-      `Domain is only ${domainAgeDays} days old (very new — common scam signal)`
+      `✕ Domain age: ${domainAgeDays} days (very new domain)`
     );
     return trustScore - 25;
   }
 
   if (domainAgeDays < 180) {
     riskIndicators.push(
-      `Domain is ${domainAgeDays} days old (less than 6 months — proceed with caution)`
+      `⚠ Domain age: ${domainAgeDays} days (newer domain)`
     );
     return trustScore - 10;
   }
 
+  const years =
+    Math.floor(domainAgeDays / 365);
+
   riskIndicators.push(
-    `Domain is ${domainAgeDays} days old (established registration)`
+    `✓ Domain age: ${years} years (established domain)`
   );
+
   return trustScore;
 }
 
