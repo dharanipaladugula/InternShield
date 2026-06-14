@@ -1533,15 +1533,15 @@ async function analyzeInternshipUrl(rawUrl) {
   (hostname.match(/\d/g) || []).length;
 
 if (digitCount >= 4) {
-  trustScore -= 10;
-
+  trustScore -= 20;
+  suspiciousSignalCount++;
   riskIndicators.push(
     "Domain contains excessive numeric characters"
   );
 }
 if (digitCount >= 8) {
-  trustScore -= 15;
-
+  trustScore -= 35;
+  suspiciousSignalCount++;
   riskIndicators.push(
     "Domain contains an unusually high number of digits"
   );
@@ -1626,8 +1626,7 @@ if (
   
     if (hyphenCount >= 2) {
       suspiciousSignalCount++;
-    trustScore -= 10;
-  
+    trustScore -= 20;
     riskIndicators.push(
       "Domain contains multiple hyphens"
     );
@@ -1764,10 +1763,15 @@ try {
       domainAgeDays = calculateDomainAgeDays(creationDate);
 
       if (domainAgeDays === null) {
-        riskIndicators.push(
-          "Could not determine domain age from WHOIS (missing or unparseable creation date)"
-        );
-      } else {
+  trustScore -= 25;
+
+  suspiciousSignalCount++;
+
+  riskIndicators.push(
+    "Unable to verify domain age"
+  );
+}
+       else {
         trustScore = applyDomainAgeScoring(
           trustScore,
           riskIndicators,
@@ -1779,7 +1783,7 @@ try {
     riskIndicators.push(`Domain age check failed: ${err.message}`);
   }
   if (suspiciousSignalCount >= 3) {
-    trustScore -= 15;
+    trustScore -= 25;
   
     riskIndicators.push(
       "Multiple suspicious domain signals detected"
